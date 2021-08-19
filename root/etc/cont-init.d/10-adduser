@@ -1,0 +1,19 @@
+#!/usr/bin/with-contenv bash
+
+PUID=${PUID:-1009}
+PGID=${PGID:-1009}
+
+groupmod -o -g "$PGID" rclone
+usermod -o -u "$PUID" rclone
+
+echo '
+-------------------------------------
+GID/UID
+-------------------------------------'
+echo "
+User uid:    $(id -u rclone)
+User gid:    $(id -g rclone)
+-------------------------------------
+"
+chown rclone:rclone /data
+chown rclone:rclone /config
